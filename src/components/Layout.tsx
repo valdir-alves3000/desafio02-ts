@@ -1,12 +1,17 @@
-import { Footer } from "./Footer"
-import { Header } from "./Header/Header"
+import { Footer } from "./Footer";
+import { Header } from "./Header";
+import { ReactNode } from "react";
 
-export const Layout = ({ children }: any) => {
-  return(
+interface LayoutProps{
+  children:ReactNode
+}
+
+export const Layout = ({ children }: LayoutProps) => {
+  return (
     <>
       <Header />
-      { children }
+      {children}
       <Footer />
     </>
-  )
-}
+  );
+};
