@@ -1,18 +1,31 @@
 import { login } from "./login";
 
-describe("login", () => {
-  const mockAlert = jest.fn();
-  window.alert = mockAlert;
+// const mockSetIsLoggedIn = jest.fn();
+// const mockNavigate = jest.fn();
 
-  it("Deve exibir um alert com boas vindas", () => {
-    login("valdir@alves.com", "1234");
-    expect(mockAlert).toHaveBeenCalledWith(
-      "VALDIR, Seja bem vindo ao DIO Bank!"
-    );
+// jest.mock("react", () => ({
+//   ...jest.requireActual("react"),
+//   useContext: () => ({
+//     setIsLoggedIn: mockSetIsLoggedIn,
+//   }),
+// }));
+
+// jest.mock("react-router-dom", () => ({
+//   ...jest.requireActual("react-router-dom"),
+//   useNavigate: () => mockNavigate,
+// }));
+
+describe("login", () => {
+  const mockEmail = "valdir@dio.bank";
+  const mockPassword = "123456";
+
+  it("Deve exibir um alert com boas vindas", async () => {
+    const response = await login(mockEmail, mockPassword);
+    expect(response).toBeTruthy();
   });
 
-  it("Deve exibir um alert de erro", () => {
-    login("valdir@alves.com", "0236");
-    expect(mockAlert).toHaveBeenCalledWith("Usuário/Senha inválido!");
+  it("Naõ deve exibir a mensagem de boas vindas sem o email", async () => {
+    const response = await login("", mockPassword);
+    expect(response).toBeFalsy();
   });
 });

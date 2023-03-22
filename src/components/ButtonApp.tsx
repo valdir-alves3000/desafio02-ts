@@ -1,24 +1,16 @@
 import { Button } from "@chakra-ui/react";
-import { useState } from "react";
+import { MouseEventHandler } from "react";
 
 interface ButtonProps {
-  handleLogin: () => void;
+  handleLogin: MouseEventHandler;
   text: string;
 }
 
 export const ButtonApp = ({ handleLogin, text }: ButtonProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const handleClick = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      handleLogin();
-    }, 800);
-  };
   return (
     <Button
-      isLoading={isLoading}
-      onClick={handleClick}
+      isLoading={false}
+      onClick={handleLogin}
       color="white"
       bg="blue.300"
       size="lg"

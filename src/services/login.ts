@@ -1,8 +1,15 @@
-export const login = (email: string, password: string): void => {
-  const parseEmail = email.split("@");
-  const name = parseEmail[0].toUpperCase();
+import { api } from "../api";
+import { UserData } from "../pages/Conta";
 
-  if (password !== "1234") return alert("Usuário/Senha inválido!");
+export const login = async (
+  email: string,
+  password: string
+): Promise<boolean> => {
+  const data = (await api) as UserData;
 
-  alert(`${name}, Seja bem vindo ao DIO Bank!`);
+  if (email !== data.email || password !== data.password) {
+    return false;
+  }
+
+  return true;
 };
